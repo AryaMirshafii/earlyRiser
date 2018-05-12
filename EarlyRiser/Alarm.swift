@@ -15,28 +15,40 @@ import  AVFoundation
 @objc(Alarm)
 public class Alarm: NSManagedObject {
     private var timer:Timer!
+    private  var player: AVAudioPlayer!
+    private var context: NSManagedObjectContext!
     @NSManaged  var hour: Int16
     @NSManaged  var minutes: Int16
     @NSManaged  var amPm: String
+    @NSManaged  var isEnabled: Bool
+    @NSManaged var totalTime:Int32
     
     
-    convenience init(hour : Int16, numberOfMinutes : Int16, amORPM: String, insertIntoManagedObjectContext objectContext: NSManagedObjectContext!) {
+    convenience init(enabled: Bool, hour : Int16, numberOfMinutes : Int16, amORPM: String, insertIntoManagedObjectContext objectContext: NSManagedObjectContext!) {
         let entity = NSEntityDescription.entity(forEntityName: "Alarm", in: objectContext)!
         self.init(entity: entity, insertInto: objectContext)
         self.hour = hour
         self.amPm = amORPM
         self.minutes = numberOfMinutes
-        print("new alarm created")
+        self.isEnabled = enabled
+        self.context = objectContext
+        self.totalTime = 0
+        save()
+        initializeTimer()
+        print("Created new alarm set for " + String(hour)  + ":" + String(numberOfMinutes) + " " + amORPM)
+       
+    }
+    private func save(){
         do {
-            try objectContext.save()
-            print("Created new alarm set for " + String(hour)  + ":" + String(numberOfMinutes) + " " + amORPM)
-            initializeTimer()
+            try context.save()
+            
+            
         } catch {
             fatalError("Failure to save context: \(error)")
         }
     }
     
-    func initializeTimer(){
+    private func initializeTimer(){
         let date = Date()
         let calendar = Calendar.current
         var ActualHour = calendar.component(.hour, from: date)
@@ -46,37 +58,61 @@ public class Alarm: NSManagedObject {
         if(ActualHour > 12) {
             ActualHour = ActualHour - 12
         }
-        let currentTime = (actualMinutes * 60) + (ActualHour * 3600) + actualSeconds
-        
-        var time:Int = 0
-        
-        time += abs((Int(hour) * 3600) + (Int(minutes) * 60) - currentTime)
-        print("The timer time is" + String(time))
-        print("the current times is" + String(currentTime))
-        print("The timer will ring in " + String(time) + "seconds")
+        let currentTime:Int32 = Int32((actualMinutes * 60) + (ActualHour * 3600) + actualSeconds)
         
         
         
-        timer = Timer.scheduledTimer(timeInterval: TimeInterval(time), target: self,      selector: #selector(playsong), userInfo: nil, repeats: false)
+        totalTime += abs((Int32(hour) * 3600) + (Int32(minutes) * 60) - currentTime)
+        //print("The timer time is" + String(time))
+        //print("the current times is" + String(currentTime))
+        print("The timer will ring in " + String(totalTime) + "seconds")
+        
+        
+        
+        timer = Timer.scheduledTimer(timeInterval: TimeInterval(totalTime), target: self,      selector: #selector(playsong), userInfo: nil, repeats: false)
     }
     
+    
     @objc private func playsong(){
-        print("Alarm is rining")
+        //timer.invalidate()
+       timer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(alarmSequence), userInfo: nil, repeats: true)
         
-        guard let url = Bundle.main.url(forResource: "takingCareOfAlarm", withExtension: "mp3") else { return }
+        print("Alarm is ringing")
         
+        let path = Bundle.main.path(forResource: "takingCareOfAlarm.mp3", ofType:nil)!
+        let url = URL(fileURLWithPath: path)
+       
         do {
-            try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback)
+            player = try AVAudioPlayer(contentsOf: url)
+            player.play()
+            try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback, with: .mixWithOthers)
             try AVAudioSession.sharedInstance().setActive(true)
             
-            let player = try AVAudioPlayer(contentsOf: url)
+            print("Song PLayed")
+            self.isEnabled = false
+            self.save()
+        } catch {
             
-            player.play()
-            print("Song Played!")
-            
-        } catch let error {
-            print(error.localizedDescription)
         }
+        
+    }
+    
+    
+    
+    
+    
+    
+    private var timerCounter = 0
+    @objc func alarmSequence(){
+        if(timerCounter == 120){
+            self.timer.invalidate()
+           
+        } else {
+            AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
+            timerCounter += 1
+        }
+        
+        
     }
     
 }

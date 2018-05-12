@@ -20,6 +20,57 @@
 	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>Let Me use your location senpai?</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Let Me use your location senpai?</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Let Me use your location senpai?</string>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>audio</string>
+		<string>fetch</string>
+		<string>location</string>
+		<string>remote-notification</string>
+	</array>
+	<key>UIAppFonts</key>
+	<array>
+		<string>HKGrotesk-MediumLegacy.ttf</string>
+		<string>HKGrotesk-Regular.ttf</string>
+		<string>HKGrotesk-RegularLegacy.ttf</string>
+		<string>HKGrotesk-SemiBold.ttf</string>
+		<string>HKGrotesk-SemiBoldItalic.ttf</string>
+		<string>HKGrotesk-SemiBoldLegacy.ttf</string>
+		<string>HKGrotesk-Light.ttf</string>
+		<string>HKGrotesk-LightItalic.ttf</string>
+		<string>HKGrotesk-LightItalicLegacy.ttf</string>
+		<string>HKGrotesk-LightLegacy.ttf</string>
+		<string>HKGrotesk-Medium.ttf</string>
+		<string>HKGrotesk-MediumItalic.ttf</string>
+		<string>HKGrotesk-MediumItalicLegacy.ttf</string>
+		<string>HKGrotesk-BoldItalic.ttf</string>
+		<string>HKGrotesk-BoldItalicLegacy.ttf</string>
+		<string>HKGrotesk-BoldLegacy.ttf</string>
+		<string>HKGrotesk-Italic.ttf</string>
+		<string>HKGrotesk-ItalicLegacy.ttf</string>
+		<string>HKGrotesk-Bold.ttf</string>
+		<string>palanquindark-regular.ttf</string>
+		<string>palanquindark-semibold.ttf</string>
+		<string>palanquindark-medium.ttf</string>
+		<string>palanquindark-bold.ttf</string>
+		<string>palanquin-thin.ttf</string>
+		<string>palanquin-semibold.ttf</string>
+		<string>palanquin-regular.ttf</string>
+		<string>palanquin-medium.ttf</string>
+		<string>palanquin-light.ttf</string>
+		<string>palanquin-extralight.ttf</string>
+		<string>palanquin-bold.ttf</string>
+		<string>Infinity.ttf</string>
+		<string>CODE Light.otf</string>
+		<string>CODE Bold.otf</string>
+		<string>Prime Light.otf</string>
+		<string>Prime Regular.otf</string>
+	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>

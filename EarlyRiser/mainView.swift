@@ -7,3 +7,61 @@
 //
 
 import Foundation
+import UIKit
+import CoreData
+class mainView: UITableViewController {
+    private var alarms:[Alarm]!
+    private var managedObjectContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+
+    
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        tableView.delegate = self
+        tableView.dataSource = self
+        self.tableView.separatorStyle = .none
+        
+        self.updateData()
+        
+        
+        
+        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        updateData()
+        self.tableView.reloadData()
+    }
+    private func updateData() {
+        let alarmFetch: NSFetchRequest<Alarm> = Alarm.fetchRequest() as! NSFetchRequest<Alarm>
+        do {
+            alarms = try managedObjectContext.fetch(alarmFetch) as! [Alarm]
+        } catch {
+            fatalError("Failed to fetch alarms: \(error)")
+        }
+        
+    }
+    // number of rows in table view
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        return self.alarms.count
+    }
+    
+    // create a cell for each table view row
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let cell:alarmCell = self.tableView.dequeueReusableCell(withIdentifier: "alarmCell") as! alarmCell
+        
+        
+        
+        return cell
+    }
+    
+    // method to run when table view cell is tapped
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print("You tapped cell number \(indexPath.row).")
+    }
+    
+    
+}
