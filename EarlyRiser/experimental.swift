@@ -45,6 +45,7 @@ class experimental:UIViewController{
         
     }
     @objc private func updateData() {
+        print("Data updated")
         let alarmFetch: NSFetchRequest<Alarm> = Alarm.fetchRequest() as! NSFetchRequest<Alarm>
         do {
             alarms = try managedObjectContext.fetch(alarmFetch) as! [Alarm]

@@ -21,7 +21,7 @@ class mainView: UITableViewController {
         tableView.delegate = self
         tableView.dataSource = self
         self.tableView.separatorStyle = .none
-        
+        self.tableView.rowHeight = 90
         self.updateData()
         
         
@@ -34,6 +34,7 @@ class mainView: UITableViewController {
         self.tableView.reloadData()
     }
     private func updateData() {
+        
         let alarmFetch: NSFetchRequest<Alarm> = Alarm.fetchRequest() as! NSFetchRequest<Alarm>
         do {
             alarms = try managedObjectContext.fetch(alarmFetch) as! [Alarm]
@@ -52,6 +53,13 @@ class mainView: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell:alarmCell = self.tableView.dequeueReusableCell(withIdentifier: "alarmCell") as! alarmCell
+        let alarm = alarms[indexPath.row]
+        
+        cell.theAlarm = alarm
+        cell.enableSwitch.isOn = alarm.isEnabled
+        cell.determineSwitch()
+        cell.timeLabel.text = alarm.getTimeStrings()
+        cell.amPMLabel.text = alarm.amPm
         
         
         
@@ -62,6 +70,15 @@ class mainView: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("You tapped cell number \(indexPath.row).")
     }
+    
+    @IBAction func exit(_ sender: Any) {
+        dismiss(animated: false, completion: nil)
+    }
+    
+    
+    
+    
+    
     
     
 }

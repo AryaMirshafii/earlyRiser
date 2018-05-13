@@ -10,7 +10,7 @@ import Foundation
 import CoreData
 import UIKit
 import  AVFoundation
-
+import NotificationCenter
 
 @objc(Alarm)
 public class Alarm: NSManagedObject {
@@ -21,7 +21,7 @@ public class Alarm: NSManagedObject {
     @NSManaged  var minutes: Int16
     @NSManaged  var amPm: String
     @NSManaged  var isEnabled: Bool
-    @NSManaged var totalTime:Int32
+    @NSManaged var totalTime:Int16
     
     
     convenience init(enabled: Bool, hour : Int16, numberOfMinutes : Int16, amORPM: String, insertIntoManagedObjectContext objectContext: NSManagedObjectContext!) {
@@ -58,11 +58,15 @@ public class Alarm: NSManagedObject {
         if(ActualHour > 12) {
             ActualHour = ActualHour - 12
         }
-        let currentTime:Int32 = Int32((actualMinutes * 60) + (ActualHour * 3600) + actualSeconds)
+        let currentTime:Int16 = Int16((actualMinutes * 60) + (ActualHour * 3600) + actualSeconds)
         
         
         
-        totalTime += abs((Int32(hour) * 3600) + (Int32(minutes) * 60) - currentTime)
+        totalTime = abs(hour * 3600)
+        totalTime  = totalTime + ((minutes * 60) - currentTime)
+        
+        self.setValue(totalTime, forKey: "totalTime")
+        self.save()
         //print("The timer time is" + String(time))
         //print("the current times is" + String(currentTime))
         print("The timer will ring in " + String(totalTime) + "seconds")
@@ -89,12 +93,24 @@ public class Alarm: NSManagedObject {
             try AVAudioSession.sharedInstance().setActive(true)
             
             print("Song PLayed")
-            self.isEnabled = false
+            self.setValue(false, forKey: "isEnabled")
             self.save()
+            
+            
+
+
         } catch {
             
         }
         
+        
+    }
+    
+    func getTimeStrings() -> String{
+        if(minutes < 10){
+            return String(format: "%d:%02d", hour, minutes)
+        }
+        return String(format: "%d:%d", hour,minutes)
     }
     
     

@@ -11,38 +11,36 @@ import UIKit
 
 class alarmCell: UITableViewCell{
     
-    @IBOutlet weak var alarmLabel: UILabel!
+    @IBOutlet weak var timeLabel: UILabel!
+    @IBOutlet weak var amPMLabel: UILabel!
+    
+    @IBOutlet weak var enableSwitch: UISwitch!
+    var theAlarm: Alarm!
+    
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
         
-        self.layer.borderWidth = 20
-        self.layer.borderColor = UIColor.clear.cgColor
         
+    }
+   
+    
+    
+    
+    @IBAction func switchChanged(_ sender: Any) {
         
-        
-        
-        
-        
-        
-        self.backgroundColor = .clear
-        
-        self.contentView.backgroundColor = UIColor.clear
-        
-        let whiteRoundedView : UIView = UIView(frame: CGRect(x: 10, y: 4, width: self.contentView.frame.size.width - 25, height: self.contentView.frame.size.width - 35))
-        
-        whiteRoundedView.layer.backgroundColor = UIColor(red:0.77, green:0.79, blue:0.83, alpha:1.0).cgColor
-        whiteRoundedView.layer.masksToBounds = false
-        whiteRoundedView.layer.cornerRadius = 2.0
-        whiteRoundedView.layer.shadowOffset = CGSize(width: -1, height: 1)
-        whiteRoundedView.layer.shadowOpacity = 0.2
-        
-        
-        self.contentView.addSubview(whiteRoundedView)
-        self.contentView.sendSubview(toBack: whiteRoundedView)
-        
-        
+        self.determineSwitch()
+    }
+    
+    func determineSwitch(){
+        if(enableSwitch.isOn == true){
+            
+        } else{
+            
+            enableSwitch.layer.cornerRadius = enableSwitch.frame.height / 2
+            enableSwitch.backgroundColor = UIColor(red:0.00, green:0.40, blue:1.00, alpha:1.0)
+        }
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -50,4 +48,7 @@ class alarmCell: UITableViewCell{
         
         // Configure the view for the selected state
     }
+    
+    
+    
 }
