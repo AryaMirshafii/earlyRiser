@@ -61,11 +61,31 @@ class alarmEditView: UIViewController, UIPickerViewDelegate,UIPickerViewDataSour
         timePicker.dataSource = self
         timePicker.layer.cornerRadius = 20
         timePicker.clipsToBounds = true
-        timePicker.selectRow(12, inComponent: 0, animated: false)
-        timePicker.selectRow(60, inComponent: 1, animated: false)
-        timePicker.backgroundColor = UIColor.clear
+        
+        
+        
+        viewDidAppear(false)
         
        
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        timePicker.backgroundColor = UIColor.clear
+        let date = Date()
+        let calendar = Calendar.current
+        var ActualHour = calendar.component(.hour, from: date) + 23
+        let actualMinutes = calendar.component(.minute, from: date) + 120
+        if((ActualHour - 23) < 12){
+            timePicker.selectRow(0, inComponent: 2, animated: false)
+        } else if((ActualHour - 23) > 12) {
+            timePicker.selectRow(1, inComponent: 2, animated: false)
+        }
+        
+        
+        
+        
+        timePicker.selectRow(ActualHour, inComponent: 0, animated: false)
+        timePicker.selectRow(actualMinutes, inComponent: 1, animated: false)
+        
     }
     
     
