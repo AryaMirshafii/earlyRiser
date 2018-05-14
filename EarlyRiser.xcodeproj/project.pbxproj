@@ -10,7 +10,26 @@
 		1E048C86781A8C009510BB20 /* Pods_EarlyRiserUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95516C436F1DE6E76EEC92D9 /* Pods_EarlyRiserUITests.framework */; };
 		76F6F86A08AF0E50744ED23A /* Pods_EarlyRiser.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DDB1FB62898067D0912FD4C /* Pods_EarlyRiser.framework */; };
 		96B576004D5CC97F7C2D8A23 /* Pods_EarlyRiserTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE5EF8C11156A488EDBCE8E0 /* Pods_EarlyRiserTests.framework */; };
-		D10714BD20A8EBC4006BB94F /* MJMaterialSwitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = D10714BC20A8EBC4006BB94F /* MJMaterialSwitch.swift */; };
+		D1008E6C20A922A400EE47E7 /* Pods_EarlyRiser.framework in Resources */ = {isa = PBXBuildFile; fileRef = 1DDB1FB62898067D0912FD4C /* Pods_EarlyRiser.framework */; };
+		D1008E6D20A94D6300EE47E7 /* HKGrotesk-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D1C84CBD209418EC0078C534 /* HKGrotesk-SemiBold.ttf */; };
+		D1008E6E20A94D6300EE47E7 /* HKGrotesk-SemiBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D1C84CC2209418ED0078C534 /* HKGrotesk-SemiBoldItalic.ttf */; };
+		D1008E6F20A94D6300EE47E7 /* HKGrotesk-SemiBoldItalicLegacy.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D1C84CBE209418EC0078C534 /* HKGrotesk-SemiBoldItalicLegacy.ttf */; };
+		D1008E7020A94D6300EE47E7 /* HKGrotesk-SemiBoldLegacy.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D1C84CC3209418ED0078C534 /* HKGrotesk-SemiBoldLegacy.ttf */; };
+		D1008E7120A94D6300EE47E7 /* HKGrotesk-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D1C84CC1209418ED0078C534 /* HKGrotesk-BoldItalic.ttf */; };
+		D1008E7220A94D6300EE47E7 /* HKGrotesk-BoldItalicLegacy.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D1C84CBC209418EC0078C534 /* HKGrotesk-BoldItalicLegacy.ttf */; };
+		D1008E7320A94D6300EE47E7 /* HKGrotesk-BoldLegacy.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D1C84CCA209418EE0078C534 /* HKGrotesk-BoldLegacy.ttf */; };
+		D1008E7420A94D6300EE47E7 /* HKGrotesk-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D1C84CC8209418EE0078C534 /* HKGrotesk-Italic.ttf */; };
+		D1008E7520A94D6300EE47E7 /* HKGrotesk-ItalicLegacy.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D1C84CBA209418EC0078C534 /* HKGrotesk-ItalicLegacy.ttf */; };
+		D1008E7620A94D6300EE47E7 /* HKGrotesk-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D1C84CC6209418ED0078C534 /* HKGrotesk-Light.ttf */; };
+		D1008E7720A94D6300EE47E7 /* HKGrotesk-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D1C84CBF209418EC0078C534 /* HKGrotesk-LightItalic.ttf */; };
+		D1008E7820A94D6300EE47E7 /* HKGrotesk-LightItalicLegacy.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D1C84CB9209418EB0078C534 /* HKGrotesk-LightItalicLegacy.ttf */; };
+		D1008E7920A94D6300EE47E7 /* HKGrotesk-LightLegacy.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D1C84CC9209418EE0078C534 /* HKGrotesk-LightLegacy.ttf */; };
+		D1008E7A20A94D6300EE47E7 /* HKGrotesk-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D1C84CC4209418ED0078C534 /* HKGrotesk-Medium.ttf */; };
+		D1008E7B20A94D6300EE47E7 /* HKGrotesk-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D1C84CBB209418EC0078C534 /* HKGrotesk-MediumItalic.ttf */; };
+		D1008E7C20A94D6300EE47E7 /* HKGrotesk-MediumItalicLegacy.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D1C84CC5209418ED0078C534 /* HKGrotesk-MediumItalicLegacy.ttf */; };
+		D1008E7D20A94D6300EE47E7 /* HKGrotesk-MediumLegacy.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D1C84CC7209418ED0078C534 /* HKGrotesk-MediumLegacy.ttf */; };
+		D1008E7E20A94D6300EE47E7 /* HKGrotesk-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D1C84CC0209418EC0078C534 /* HKGrotesk-Regular.ttf */; };
+		D1008E7F20A94D6300EE47E7 /* HKGrotesk-RegularLegacy.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D1C84CB8209418EB0078C534 /* HKGrotesk-RegularLegacy.ttf */; };
 		D1158FED2095676A000F63EC /* Alarm.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1158FEC2095676A000F63EC /* Alarm.swift */; };
 		D1A6447F2096690B00BF5ED9 /* takingCareOfAlarm.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D1A6447E2096690A00BF5ED9 /* takingCareOfAlarm.mp3 */; };
 		D1C542C220A68DF700927932 /* experimental.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1C542C120A68DF700927932 /* experimental.swift */; };
@@ -52,7 +71,6 @@
 		8D4D6F6ADDEF4F1D5AE1A8FF /* Pods-EarlyRiser.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EarlyRiser.debug.xcconfig"; path = "Pods/Target Support Files/Pods-EarlyRiser/Pods-EarlyRiser.debug.xcconfig"; sourceTree = "<group>"; };
 		95516C436F1DE6E76EEC92D9 /* Pods_EarlyRiserUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EarlyRiserUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA4E7043753C2D66370B292F /* Pods-EarlyRiserUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EarlyRiserUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-EarlyRiserUITests/Pods-EarlyRiserUITests.release.xcconfig"; sourceTree = "<group>"; };
-		D10714BC20A8EBC4006BB94F /* MJMaterialSwitch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MJMaterialSwitch.swift; sourceTree = "<group>"; };
 		D10714BE20A8FF2D006BB94F /* EarlyRiser.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = EarlyRiser.entitlements; sourceTree = "<group>"; };
 		D1158FEC2095676A000F63EC /* Alarm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alarm.swift; sourceTree = "<group>"; };
 		D1A6447E2096690A00BF5ED9 /* takingCareOfAlarm.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = takingCareOfAlarm.mp3; sourceTree = "<group>"; };
@@ -163,7 +181,6 @@
 			isa = PBXGroup;
 			children = (
 				D10714BE20A8FF2D006BB94F /* EarlyRiser.entitlements */,
-				D10714BC20A8EBC4006BB94F /* MJMaterialSwitch.swift */,
 				D1158FEC2095676A000F63EC /* Alarm.swift */,
 				D1C84CD02094265C0078C534 /* alarmCell.swift */,
 				D1C84C872094188F0078C534 /* AppDelegate.swift */,
@@ -361,6 +378,26 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D1008E6D20A94D6300EE47E7 /* HKGrotesk-SemiBold.ttf in Resources */,
+				D1008E6E20A94D6300EE47E7 /* HKGrotesk-SemiBoldItalic.ttf in Resources */,
+				D1008E6F20A94D6300EE47E7 /* HKGrotesk-SemiBoldItalicLegacy.ttf in Resources */,
+				D1008E7020A94D6300EE47E7 /* HKGrotesk-SemiBoldLegacy.ttf in Resources */,
+				D1008E7120A94D6300EE47E7 /* HKGrotesk-BoldItalic.ttf in Resources */,
+				D1008E7220A94D6300EE47E7 /* HKGrotesk-BoldItalicLegacy.ttf in Resources */,
+				D1008E7320A94D6300EE47E7 /* HKGrotesk-BoldLegacy.ttf in Resources */,
+				D1008E7420A94D6300EE47E7 /* HKGrotesk-Italic.ttf in Resources */,
+				D1008E7520A94D6300EE47E7 /* HKGrotesk-ItalicLegacy.ttf in Resources */,
+				D1008E7620A94D6300EE47E7 /* HKGrotesk-Light.ttf in Resources */,
+				D1008E7720A94D6300EE47E7 /* HKGrotesk-LightItalic.ttf in Resources */,
+				D1008E7820A94D6300EE47E7 /* HKGrotesk-LightItalicLegacy.ttf in Resources */,
+				D1008E7920A94D6300EE47E7 /* HKGrotesk-LightLegacy.ttf in Resources */,
+				D1008E7A20A94D6300EE47E7 /* HKGrotesk-Medium.ttf in Resources */,
+				D1008E7B20A94D6300EE47E7 /* HKGrotesk-MediumItalic.ttf in Resources */,
+				D1008E7C20A94D6300EE47E7 /* HKGrotesk-MediumItalicLegacy.ttf in Resources */,
+				D1008E7D20A94D6300EE47E7 /* HKGrotesk-MediumLegacy.ttf in Resources */,
+				D1008E7E20A94D6300EE47E7 /* HKGrotesk-Regular.ttf in Resources */,
+				D1008E7F20A94D6300EE47E7 /* HKGrotesk-RegularLegacy.ttf in Resources */,
+				D1008E6C20A922A400EE47E7 /* Pods_EarlyRiser.framework in Resources */,
 				D1C84C952094188F0078C534 /* LaunchScreen.storyboard in Resources */,
 				D1C84C922094188F0078C534 /* Assets.xcassets in Resources */,
 				D1C84C8D2094188F0078C534 /* Main.storyboard in Resources */,
@@ -443,11 +480,13 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-EarlyRiser/Pods-EarlyRiser-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/GWInfinitePickerView/GWInfinitePickerView.framework",
 				"${BUILT_PRODUCTS_DIR}/HEDatePicker/HEDatePicker.framework",
 				"${BUILT_PRODUCTS_DIR}/UICircularProgressRing/UICircularProgressRing.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GWInfinitePickerView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/HEDatePicker.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/UICircularProgressRing.framework",
 			);
@@ -545,7 +584,6 @@
 				D1C84C8A2094188F0078C534 /* ViewController.swift in Sources */,
 				D1C84CD3209429F10078C534 /* alarmEditView.swift in Sources */,
 				D1C542C220A68DF700927932 /* experimental.swift in Sources */,
-				D10714BD20A8EBC4006BB94F /* MJMaterialSwitch.swift in Sources */,
 				D1C84C882094188F0078C534 /* AppDelegate.swift in Sources */,
 				D1C84CD12094265C0078C534 /* alarmCell.swift in Sources */,
 				D1158FED2095676A000F63EC /* Alarm.swift in Sources */,

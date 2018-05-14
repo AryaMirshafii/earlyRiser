@@ -21,7 +21,7 @@ public class Alarm: NSManagedObject {
     @NSManaged  var minutes: Int16
     @NSManaged  var amPm: String
     @NSManaged  var isEnabled: Bool
-    @NSManaged var totalTime:Int16
+    @NSManaged var totalTime:Int64
     
     
     convenience init(enabled: Bool, hour : Int16, numberOfMinutes : Int16, amORPM: String, insertIntoManagedObjectContext objectContext: NSManagedObjectContext!) {
@@ -58,12 +58,13 @@ public class Alarm: NSManagedObject {
         if(ActualHour > 12) {
             ActualHour = ActualHour - 12
         }
-        let currentTime:Int16 = Int16((actualMinutes * 60) + (ActualHour * 3600) + actualSeconds)
+       
+        let currentTime:Int64 = Int64((actualMinutes * 60) + (ActualHour * 3600) + actualSeconds)
         
         
         
-        totalTime = abs(hour * 3600)
-        totalTime  = totalTime + ((minutes * 60) - currentTime)
+        totalTime = Int64(abs(hour * 3600))
+        totalTime  = totalTime + Int64(minutes * 60) - currentTime
         
         self.setValue(totalTime, forKey: "totalTime")
         self.save()
