@@ -11,9 +11,10 @@ import CoreData
 import UIKit
 import  AVFoundation
 import NotificationCenter
+import UserNotifications
 
 @objc(Alarm)
-public class Alarm: NSManagedObject {
+public class Alarm: NSManagedObject, UNUserNotificationCenterDelegate {
     private var timer:Timer!
     private  var player: AVAudioPlayer!
     private var context: NSManagedObjectContext!
@@ -36,8 +37,24 @@ public class Alarm: NSManagedObject {
         save()
         initializeTimer()
         print("Created new alarm set for " + String(hour)  + ":" + String(numberOfMinutes) + " " + amORPM)
+        UNUserNotificationCenter.current().delegate = self
        
     }
+    
+    
+    
+    
+    public func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        
+        
+        
+        completionHandler([.alert, .sound])
+    }
+    
+    
+    
+    
+    
     private func save(){
         do {
             try context.save()
@@ -74,8 +91,45 @@ public class Alarm: NSManagedObject {
         
         
         
-        timer = Timer.scheduledTimer(timeInterval: TimeInterval(totalTime), target: self,      selector: #selector(playsong), userInfo: nil, repeats: false)
+        //timer = Timer.scheduledTimer(timeInterval: TimeInterval(totalTime), target: self,      selector: #selector(playsong), userInfo: nil, repeats: false)
+        
+        
+        timedNotifications(inSeconds: TimeInterval(totalTime)) { (success) in
+            if success {
+                print("Successfully Set Alarm")
+            }
+        }
     }
+    
+    
+    
+    func timedNotifications(inSeconds: TimeInterval, completion: @escaping (_ Success: Bool) -> ()) {
+        
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: inSeconds, repeats: false)
+        
+        let content = UNMutableNotificationContent()
+    
+        content.title = "Alarm is ringing!!!!"
+        
+        
+    
+        content.sound = UNNotificationSound(named: "takingCareOfAlarm.m4a")
+        
+        
+    
+        let request = UNNotificationRequest(identifier: "customNotification", content: content, trigger: trigger)
+        
+        UNUserNotificationCenter.current().add(request) { (error) in
+            if error != nil {
+                completion(false)
+            }else {
+                completion(true)
+            }
+        }
+    }
+    
+    
+    
     
     
     @objc private func playsong(){

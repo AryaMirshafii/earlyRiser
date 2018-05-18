@@ -10,6 +10,8 @@ import Foundation
 import UIKit
 import UICircularProgressRing
 import CoreData
+import NotificationCenter
+import UserNotifications
 
 
 class experimental:UIViewController{
@@ -36,7 +38,14 @@ class experimental:UIViewController{
         
         notificationCenter.addObserver(self, selector: #selector(self.updateData), name: Notification.Name.NSManagedObjectContextObjectsDidChange, object: nil)
         
-        
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { (success, error) in
+            
+            if error != nil {
+                print("Authorization Unsuccessfull")
+            }else {
+                print("Authorization Successfull")
+            }
+        }
 
     }
     

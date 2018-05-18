@@ -42,6 +42,13 @@ class mainView: UITableViewController {
             fatalError("Failed to fetch alarms: \(error)")
         }
         
+        
+        if(alarms.isEmpty){
+            return
+        }else{
+            alarms = alarms.sorted(by: { $0.totalTime > $1.totalTime })
+        }
+        
     }
     // number of rows in table view
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

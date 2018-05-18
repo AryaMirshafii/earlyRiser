@@ -112,6 +112,7 @@
 		D1C84CCE2094250B0078C534 /* mainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mainView.swift; sourceTree = "<group>"; };
 		D1C84CD02094265C0078C534 /* alarmCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = alarmCell.swift; sourceTree = "<group>"; };
 		D1C84CD2209429F10078C534 /* alarmEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = alarmEditView.swift; sourceTree = "<group>"; };
+		D1FF8F5320AE918C00901BFB /* takingCareOfAlarm.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = takingCareOfAlarm.m4a; sourceTree = "<group>"; };
 		DE5EF8C11156A488EDBCE8E0 /* Pods_EarlyRiserTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EarlyRiserTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EBF64D20EFDDF945EBEA36B6 /* Pods-EarlyRiser.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EarlyRiser.release.xcconfig"; path = "Pods/Target Support Files/Pods-EarlyRiser/Pods-EarlyRiser.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -157,6 +158,7 @@
 		D1C84C7B2094188F0078C534 = {
 			isa = PBXGroup;
 			children = (
+				D1FF8F5320AE918C00901BFB /* takingCareOfAlarm.m4a */,
 				D1A6447E2096690A00BF5ED9 /* takingCareOfAlarm.mp3 */,
 				D1C84CCB209418F80078C534 /* Fonts */,
 				D1C84C862094188F0078C534 /* EarlyRiser */,
