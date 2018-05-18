@@ -23,6 +23,7 @@ class alarmEditView: UIViewController, UIPickerViewDelegate,UIPickerViewDataSour
     
    
     
+    
     @IBOutlet weak var timePicker: UIPickerView!
     
     private var hour:Int16!
@@ -66,23 +67,27 @@ class alarmEditView: UIViewController, UIPickerViewDelegate,UIPickerViewDataSour
         
         viewDidAppear(false)
         
+        
        
     }
     override func viewDidAppear(_ animated: Bool) {
         timePicker.backgroundColor = UIColor.clear
         let date = Date()
         let calendar = Calendar.current
-        var ActualHour = calendar.component(.hour, from: date) + 23
+        let ActualHour = calendar.component(.hour, from: date) + 23
         let actualMinutes = calendar.component(.minute, from: date) + 120
         if((ActualHour - 23) < 12){
+            self.amPM = "AM"
+            hour = Int16(ActualHour - 23 )
             timePicker.selectRow(0, inComponent: 2, animated: false)
         } else if((ActualHour - 23) > 12) {
+            self.amPM = "PM"
+             hour = Int16(ActualHour - 35 )
             timePicker.selectRow(1, inComponent: 2, animated: false)
         }
         
-        
-        
-        
+       
+        minutes = Int16(actualMinutes)
         timePicker.selectRow(ActualHour, inComponent: 0, animated: false)
         timePicker.selectRow(actualMinutes, inComponent: 1, animated: false)
         
@@ -127,19 +132,18 @@ class alarmEditView: UIViewController, UIPickerViewDelegate,UIPickerViewDataSour
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         if(component == 0){
-            //return hoursArray.count
+            
             self.hour = Int16(hoursArray[row % 12])
-            let position = pickerDataSize/2 + row
-            pickerView.selectRow(position, inComponent: 0, animated: false)
+            
         } else if(component == 1){
-            //return minutesArray.count
+            
             self.minutes = Int16(minutesArray[row % 60])
-            let position = pickerDataSize/2 + row
-            pickerView.selectRow(position, inComponent: 1, animated: false)
+            
         } else{
             self.amPM = amPMArray[row]
-            pickerView.selectRow(row, inComponent: 2, animated: false)
+           
         }
+        
         
     }
     
@@ -162,33 +166,45 @@ class alarmEditView: UIViewController, UIPickerViewDelegate,UIPickerViewDataSour
     @IBAction func dismiss(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
-    @objc func datePickerChanged(sender:UIDatePicker) {
-        
-        
-        
-        //dateFormatter.dateFormat = "hh:mm a"
-        let timeFormatter: DateFormatter = DateFormatter()
-        timeFormatter.dateFormat = "hh:mm a"
-        timeFormatter.locale = NSLocale.system
-        
-        
-        
-        //hour = Int16(timeFormatter.string(from: sender.date))
-        //minutes = Int16(timeFormatter.string(from: sender.date))
-        let alarmTime:String = timeFormatter.string(from: sender.date)
-        self.hour = Int16(alarmTime[0] + alarmTime[1])
-        self.minutes = Int16(alarmTime[3] + alarmTime[4])
-        self.amPM = alarmTime[6] + alarmTime[7]
-        
     
+    
+    
+    
+    
+    
+    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
+       
+        var label: UILabel? = (view as? UILabel)
+        
+        if label == nil {
+            label = UILabel()
+        }
+        label?.textColor = UIColor.white
+        label?.font = UIFont(name: "HKGrotesk-SemiBoldLegacy", size:30)
+        label?.textAlignment = .center
+        if component == 0 {
+
+            label?.text = hoursArray[row % 12]
+            return label!
+        }else if component == 1 {
+           
+            label?.text = minutesArray[row % 60]
+            return label!
+        }
+        
+        label?.text = amPMArray[row]
+        return label!
+       
     }
+
     
     
     @IBAction func saveAlarm(_ sender: Any) {
+        
         print("hours are " + String(hour))
         print("minutes are " + String(minutes))
         print("am is " + amPM)
-        let anAlarm  = Alarm(enabled: true, hour: hour, numberOfMinutes: minutes, amORPM: amPM, insertIntoManagedObjectContext: managedObjectContext)
+        _  = Alarm(enabled: true, hour: hour, numberOfMinutes: minutes, amORPM: amPM, insertIntoManagedObjectContext: managedObjectContext)
         
          dismiss(animated: true, completion: nil)
     }

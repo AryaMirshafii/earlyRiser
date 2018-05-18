@@ -73,6 +73,7 @@
 		AA4E7043753C2D66370B292F /* Pods-EarlyRiserUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EarlyRiserUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-EarlyRiserUITests/Pods-EarlyRiserUITests.release.xcconfig"; sourceTree = "<group>"; };
 		D10714BE20A8FF2D006BB94F /* EarlyRiser.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = EarlyRiser.entitlements; sourceTree = "<group>"; };
 		D1158FEC2095676A000F63EC /* Alarm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alarm.swift; sourceTree = "<group>"; };
+		D13AE9F020AE5D7B003D8544 /* EarlyRiser-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "EarlyRiser-Bridging-Header.h"; sourceTree = "<group>"; };
 		D1A6447E2096690A00BF5ED9 /* takingCareOfAlarm.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = takingCareOfAlarm.mp3; sourceTree = "<group>"; };
 		D1C542C120A68DF700927932 /* experimental.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = experimental.swift; sourceTree = "<group>"; };
 		D1C84C842094188F0078C534 /* EarlyRiser.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EarlyRiser.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -193,6 +194,7 @@
 				D1C84C932094188F0078C534 /* LaunchScreen.storyboard */,
 				D1C84C962094188F0078C534 /* Info.plist */,
 				D1C84C8E2094188F0078C534 /* EarlyRiser.xcdatamodeld */,
+				D13AE9F020AE5D7B003D8544 /* EarlyRiser-Bridging-Header.h */,
 			);
 			path = EarlyRiser;
 			sourceTree = "<group>";
@@ -331,6 +333,7 @@
 				TargetAttributes = {
 					D1C84C832094188F0078C534 = {
 						CreatedOnToolsVersion = 9.2;
+						LastSwiftMigration = 0920;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
@@ -754,6 +757,7 @@
 			baseConfigurationReference = 8D4D6F6ADDEF4F1D5AE1A8FF /* Pods-EarlyRiser.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = EarlyRiser/EarlyRiser.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = Y4XKW822R6;
@@ -762,6 +766,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = aryaMirshafii.EarlyRiser;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "EarlyRiser/EarlyRiser-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -772,6 +778,7 @@
 			baseConfigurationReference = EBF64D20EFDDF945EBEA36B6 /* Pods-EarlyRiser.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = EarlyRiser/EarlyRiser.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = Y4XKW822R6;
@@ -780,6 +787,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = aryaMirshafii.EarlyRiser;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "EarlyRiser/EarlyRiser-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
