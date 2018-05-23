@@ -134,7 +134,8 @@ public class Alarm: NSManagedObject, UNUserNotificationCenterDelegate {
     
     func timedNotifications(inSeconds: TimeInterval, completion: @escaping (_ Success: Bool) -> ()) {
         
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: inSeconds, repeats: true)
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: inSeconds, repeats: false)
+        
         
         let content = UNMutableNotificationContent()
     
@@ -150,6 +151,7 @@ public class Alarm: NSManagedObject, UNUserNotificationCenterDelegate {
         
     
         let request = UNNotificationRequest(identifier: "customNotification", content: content, trigger: trigger)
+        
         
         UNUserNotificationCenter.current().add(request) { (error) in
             if error != nil {
@@ -172,18 +174,10 @@ public class Alarm: NSManagedObject, UNUserNotificationCenterDelegate {
     @objc private func playsong(){
         //timer.invalidate()
        timer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(alarmSequence), userInfo: nil, repeats: true)
-        /**
-        print("Alarm is ringing")
         
-        let path = Bundle.main.path(forResource: "takingCareOfAlarm.mp3", ofType:nil)!
-        let url = URL(fileURLWithPath: path)
        
         do {
-            player = try AVAudioPlayer(contentsOf: url)
-            player.play()
-            try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback, with: .mixWithOthers)
-            try AVAudioSession.sharedInstance().setActive(true)
-            
+         
             print("Song PLayed")
             self.setValue(false, forKey: "isEnabled")
             self.save()
@@ -191,10 +185,10 @@ public class Alarm: NSManagedObject, UNUserNotificationCenterDelegate {
             
 
 
-        } catch {
+        } catch{
             
         }
-        */
+        
         
         
         
@@ -215,7 +209,17 @@ public class Alarm: NSManagedObject, UNUserNotificationCenterDelegate {
     }
     
     
-    
+    public func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        if response.notification.request.content.categoryIdentifier == "customNotification" {
+            // Handle the actions for the expired timer.
+            if response.actionIdentifier == "SNOOZE_ACTION" {
+                // Invalidate the old timer and create a new one. . .
+            }
+            else if response.actionIdentifier == "STOP_ACTION" {
+                // Invalidate the timer. . .
+            }
+        }
+    }
     
     
     
