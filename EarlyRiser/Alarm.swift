@@ -12,20 +12,26 @@ import UIKit
 import  AVFoundation
 import NotificationCenter
 import UserNotifications
+import MediaPlayer
 
 @objc(Alarm)
 public class Alarm: NSManagedObject, UNUserNotificationCenterDelegate {
     private var timer:Timer!
-    private  var player: AVAudioPlayer!
+    //private  var player: AVAudioPlayer!
     private var context: NSManagedObjectContext!
-    @NSManaged  var hour: Int16
-    @NSManaged  var minutes: Int16
-    @NSManaged  var amPm: String
-    @NSManaged  var isEnabled: Bool
+    @NSManaged var hour: Int64
+    @NSManaged var minutes: Int64
+    @NSManaged var amPm: String
+    @NSManaged var isEnabled: Bool
     @NSManaged var totalTime:Int64
+    @NSManaged var toneName:String
     
     
-    convenience init(enabled: Bool, hour : Int16, numberOfMinutes : Int16, amORPM: String, insertIntoManagedObjectContext objectContext: NSManagedObjectContext!) {
+    var player = MPMusicPlayerController.applicationMusicPlayer
+    var songs:[MPMediaItem]!
+    
+    
+    convenience init(enabled: Bool, hour : Int64, numberOfMinutes : Int64, amORPM: String, insertIntoManagedObjectContext objectContext: NSManagedObjectContext!, tone:String) {
         let entity = NSEntityDescription.entity(forEntityName: "Alarm", in: objectContext)!
         self.init(entity: entity, insertInto: objectContext)
         self.hour = hour
@@ -34,6 +40,7 @@ public class Alarm: NSManagedObject, UNUserNotificationCenterDelegate {
         self.isEnabled = enabled
         self.context = objectContext
         self.totalTime = 0
+        self.toneName = tone
         save()
         initializeTimer()
         print("Created new alarm set for " + String(hour)  + ":" + String(numberOfMinutes) + " " + amORPM)
@@ -79,8 +86,11 @@ public class Alarm: NSManagedObject, UNUserNotificationCenterDelegate {
         let currentTime:Int64 = Int64((actualMinutes * 60) + (ActualHour * 3600) + actualSeconds)
         
         
+        print("hour is: + " + String(hour))
         
-        totalTime = Int64(abs(hour * 3600))
+        totalTime = (abs(hour * 3600))
+        
+        
         totalTime  = totalTime + Int64(minutes * 60) - currentTime
         
         self.setValue(totalTime, forKey: "totalTime")
@@ -90,8 +100,23 @@ public class Alarm: NSManagedObject, UNUserNotificationCenterDelegate {
         print("The timer will ring in " + String(totalTime) + "seconds")
         
         
+        print("song" + toneName)
         
-        //timer = Timer.scheduledTimer(timeInterval: TimeInterval(totalTime), target: self,      selector: #selector(playsong), userInfo: nil, repeats: false)
+        
+        
+        songs =  MPMediaQuery.songs().items!.filter({ (mod) -> Bool in
+            
+            
+            return (mod.title != nil && mod.title == toneName)
+        })
+        
+        
+        
+        if(!songs.isEmpty){
+            print("Songs arent empty")
+             timer = Timer.scheduledTimer(timeInterval: TimeInterval(totalTime - 1), target: self,      selector: #selector(playsong), userInfo: nil, repeats: false)
+        }
+       
         
         
         timedNotifications(inSeconds: TimeInterval(totalTime)) { (success) in
@@ -99,21 +124,28 @@ public class Alarm: NSManagedObject, UNUserNotificationCenterDelegate {
                 print("Successfully Set Alarm")
             }
         }
+        
+        
+        
+        
     }
     
     
     
     func timedNotifications(inSeconds: TimeInterval, completion: @escaping (_ Success: Bool) -> ()) {
         
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: inSeconds, repeats: false)
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: inSeconds, repeats: true)
         
         let content = UNMutableNotificationContent()
     
         content.title = "Alarm is ringing!!!!"
         
         
-    
-        content.sound = UNNotificationSound(named: "takingCareOfAlarm.m4a")
+        if(songs.isEmpty){
+             content.sound = UNNotificationSound.default()
+        }
+       
+       
         
         
     
@@ -129,13 +161,18 @@ public class Alarm: NSManagedObject, UNUserNotificationCenterDelegate {
     }
     
     
+    private func alarmRinging(){
+        
+    }
+    
+    
     
     
     
     @objc private func playsong(){
         //timer.invalidate()
        timer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(alarmSequence), userInfo: nil, repeats: true)
-        
+        /**
         print("Alarm is ringing")
         
         let path = Bundle.main.path(forResource: "takingCareOfAlarm.mp3", ofType:nil)!
@@ -157,6 +194,15 @@ public class Alarm: NSManagedObject, UNUserNotificationCenterDelegate {
         } catch {
             
         }
+        */
+        
+        
+        
+       
+        let mediaCollection = MPMediaItemCollection(items: [songs[0]])
+        self.player.setQueue(with: mediaCollection)
+        player.prepareToPlay()
+        player.play()
         
         
     }

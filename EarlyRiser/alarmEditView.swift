@@ -8,6 +8,7 @@
 
 import Foundation
 import  UIKit
+import MediaPlayer
 
 
 import HEDatePicker
@@ -18,16 +19,27 @@ extension String {
         return String(self[idx1..<idx2])
     }
 }
-class alarmEditView: UIViewController, UIPickerViewDelegate,UIPickerViewDataSource {
+class alarmEditView: UIViewController, UIPickerViewDelegate,UIPickerViewDataSource,UITableViewDataSource, UITableViewDelegate {
+    
+    
+    
+    
+    
     
     
    
     
+    @IBOutlet weak var alarmSoundTableView: UITableView!
     
     @IBOutlet weak var timePicker: UIPickerView!
     
-    private var hour:Int16!
-    private var minutes:Int16!
+    @IBOutlet weak var currentAlarmSound: UILabel!
+    
+    
+    
+    
+    private var hour:Int64!
+    private var minutes:Int64!
     private var amPM:String!
     private var managedObjectContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
@@ -35,6 +47,8 @@ class alarmEditView: UIViewController, UIPickerViewDelegate,UIPickerViewDataSour
     private var minutesArray = [String]()
     private var amPMArray = [String]()
     let pickerDataSize = 100_000
+    private var selectedSoundCellIndex:Int!
+    private var currentToneName = "Default"
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -67,9 +81,73 @@ class alarmEditView: UIViewController, UIPickerViewDelegate,UIPickerViewDataSour
         
         viewDidAppear(false)
         
+        alarmSoundTableView.numberOfRows(inSection: 1)
+        alarmSoundTableView.layer.cornerRadius = 10
+        alarmSoundTableView.delegate = self
+        alarmSoundTableView.dataSource = self
         
+        
+        
+        
+        if (MPMediaLibrary.authorizationStatus() != .authorized){
+            MPMediaLibrary.requestAuthorization { (status) in
+                if status == .authorized {
+                    
+                    print("Music Libaray is Authorized")
+                    
+                }else {
+                    self.alarmSoundTableView.isHidden = true
+                }
+                
+                
+                
+            }
+        }
        
     }
+    
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+         if (MPMediaLibrary.authorizationStatus() != .authorized){
+            return 1
+        }
+        return (MPMediaQuery.songs().items?.count)!
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let cell = tableView.cellForRow(at: indexPath) as! alarmSoundCell
+        cell.isSelectedImage.isHidden = false
+        if(selectedSoundCellIndex == nil){
+            selectedSoundCellIndex = Int(indexPath.row)
+            currentToneName = String(cell.alarmSoundLabel.text!)
+            currentAlarmSound.text = "Tone: " + currentToneName
+        }else {
+            let theIndexPath = IndexPath(row: selectedSoundCellIndex, section: 0)
+            let previousSelection = tableView.cellForRow(at: theIndexPath) as! alarmSoundCell
+            previousSelection.isSelectedImage.isHidden = true
+            selectedSoundCellIndex = Int(indexPath.row)
+            currentToneName = String(cell.alarmSoundLabel.text!)
+            currentAlarmSound.text = "Tone: " + currentToneName
+        }
+    }
+    
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "alarmSoundCell") as! alarmSoundCell
+        
+        cell.alarmSoundLabel.text = MPMediaQuery.songs().items?[indexPath.row].title
+        cell.isSelectedImage.isHidden = true
+        
+        return cell
+    }
+    
+    
+    
+    
+    
+    
+    
     override func viewDidAppear(_ animated: Bool) {
         timePicker.backgroundColor = UIColor.clear
         let date = Date()
@@ -78,16 +156,16 @@ class alarmEditView: UIViewController, UIPickerViewDelegate,UIPickerViewDataSour
         let actualMinutes = calendar.component(.minute, from: date) + 120
         if((ActualHour - 23) < 12){
             self.amPM = "AM"
-            hour = Int16(ActualHour - 23 )
+            hour = Int64(ActualHour - 23 )
             timePicker.selectRow(0, inComponent: 2, animated: false)
         } else if((ActualHour - 23) > 12) {
             self.amPM = "PM"
-             hour = Int16(ActualHour - 35 )
+             hour = Int64(ActualHour - 35 )
             timePicker.selectRow(1, inComponent: 2, animated: false)
         }
         
        
-        minutes = Int16(actualMinutes)
+        minutes = Int64(actualMinutes)
         timePicker.selectRow(ActualHour, inComponent: 0, animated: false)
         timePicker.selectRow(actualMinutes, inComponent: 1, animated: false)
         
@@ -133,11 +211,11 @@ class alarmEditView: UIViewController, UIPickerViewDelegate,UIPickerViewDataSour
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         if(component == 0){
             
-            self.hour = Int16(hoursArray[row % 12])
+            self.hour = Int64(hoursArray[row % 12])
             
         } else if(component == 1){
             
-            self.minutes = Int16(minutesArray[row % 60])
+            self.minutes = Int64(minutesArray[row % 60])
             
         } else{
             self.amPM = amPMArray[row]
@@ -150,10 +228,10 @@ class alarmEditView: UIViewController, UIPickerViewDelegate,UIPickerViewDataSour
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         
         if(component == 0){
-            self.hour = Int16(hoursArray[row % 12])
+            self.hour = Int64(hoursArray[row % 12])
             return hoursArray[row % 12]
         } else if(component == 1){
-            self.minutes = Int16(minutesArray[row % 60])
+            self.minutes = Int64(minutesArray[row % 60])
             return minutesArray[row % 60]
         }
         self.amPM = amPMArray[row]
@@ -204,7 +282,7 @@ class alarmEditView: UIViewController, UIPickerViewDelegate,UIPickerViewDataSour
         print("hours are " + String(hour))
         print("minutes are " + String(minutes))
         print("am is " + amPM)
-        _  = Alarm(enabled: true, hour: hour, numberOfMinutes: minutes, amORPM: amPM, insertIntoManagedObjectContext: managedObjectContext)
+        _  = Alarm(enabled: true, hour: hour, numberOfMinutes: minutes, amORPM: amPM, insertIntoManagedObjectContext: managedObjectContext,tone: currentToneName)
         
          dismiss(animated: true, completion: nil)
     }

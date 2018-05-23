@@ -32,6 +32,7 @@
 		D1008E7F20A94D6300EE47E7 /* HKGrotesk-RegularLegacy.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D1C84CB8209418EB0078C534 /* HKGrotesk-RegularLegacy.ttf */; };
 		D1158FED2095676A000F63EC /* Alarm.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1158FEC2095676A000F63EC /* Alarm.swift */; };
 		D1A6447F2096690B00BF5ED9 /* takingCareOfAlarm.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D1A6447E2096690A00BF5ED9 /* takingCareOfAlarm.mp3 */; };
+		D1C41E1820B530FA00D97458 /* alarmSoundCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1C41E1720B530FA00D97458 /* alarmSoundCell.swift */; };
 		D1C542C220A68DF700927932 /* experimental.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1C542C120A68DF700927932 /* experimental.swift */; };
 		D1C84C882094188F0078C534 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1C84C872094188F0078C534 /* AppDelegate.swift */; };
 		D1C84C8A2094188F0078C534 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1C84C892094188F0078C534 /* ViewController.swift */; };
@@ -44,6 +45,7 @@
 		D1C84CCF2094250B0078C534 /* mainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1C84CCE2094250B0078C534 /* mainView.swift */; };
 		D1C84CD12094265C0078C534 /* alarmCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1C84CD02094265C0078C534 /* alarmCell.swift */; };
 		D1C84CD3209429F10078C534 /* alarmEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1C84CD2209429F10078C534 /* alarmEditView.swift */; };
+		D1EA4B0C20B5172500BD3F9D /* alarmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1EA4B0B20B5172500BD3F9D /* alarmView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,6 +77,7 @@
 		D1158FEC2095676A000F63EC /* Alarm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alarm.swift; sourceTree = "<group>"; };
 		D13AE9F020AE5D7B003D8544 /* EarlyRiser-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "EarlyRiser-Bridging-Header.h"; sourceTree = "<group>"; };
 		D1A6447E2096690A00BF5ED9 /* takingCareOfAlarm.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = takingCareOfAlarm.mp3; sourceTree = "<group>"; };
+		D1C41E1720B530FA00D97458 /* alarmSoundCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = alarmSoundCell.swift; sourceTree = "<group>"; };
 		D1C542C120A68DF700927932 /* experimental.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = experimental.swift; sourceTree = "<group>"; };
 		D1C84C842094188F0078C534 /* EarlyRiser.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EarlyRiser.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D1C84C872094188F0078C534 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -112,6 +115,7 @@
 		D1C84CCE2094250B0078C534 /* mainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mainView.swift; sourceTree = "<group>"; };
 		D1C84CD02094265C0078C534 /* alarmCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = alarmCell.swift; sourceTree = "<group>"; };
 		D1C84CD2209429F10078C534 /* alarmEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = alarmEditView.swift; sourceTree = "<group>"; };
+		D1EA4B0B20B5172500BD3F9D /* alarmView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = alarmView.swift; sourceTree = "<group>"; };
 		D1FF8F5320AE918C00901BFB /* takingCareOfAlarm.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = takingCareOfAlarm.m4a; sourceTree = "<group>"; };
 		DE5EF8C11156A488EDBCE8E0 /* Pods_EarlyRiserTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EarlyRiserTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EBF64D20EFDDF945EBEA36B6 /* Pods-EarlyRiser.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EarlyRiser.release.xcconfig"; path = "Pods/Target Support Files/Pods-EarlyRiser/Pods-EarlyRiser.release.xcconfig"; sourceTree = "<group>"; };
@@ -191,12 +195,14 @@
 				D1C84C8B2094188F0078C534 /* Main.storyboard */,
 				D1C542C120A68DF700927932 /* experimental.swift */,
 				D1C84CD2209429F10078C534 /* alarmEditView.swift */,
+				D1C41E1720B530FA00D97458 /* alarmSoundCell.swift */,
 				D1C84CCE2094250B0078C534 /* mainView.swift */,
 				D1C84C912094188F0078C534 /* Assets.xcassets */,
 				D1C84C932094188F0078C534 /* LaunchScreen.storyboard */,
 				D1C84C962094188F0078C534 /* Info.plist */,
 				D1C84C8E2094188F0078C534 /* EarlyRiser.xcdatamodeld */,
 				D13AE9F020AE5D7B003D8544 /* EarlyRiser-Bridging-Header.h */,
+				D1EA4B0B20B5172500BD3F9D /* alarmView.swift */,
 			);
 			path = EarlyRiser;
 			sourceTree = "<group>";
@@ -593,6 +599,8 @@
 				D1C84CD12094265C0078C534 /* alarmCell.swift in Sources */,
 				D1158FED2095676A000F63EC /* Alarm.swift in Sources */,
 				D1C84CCF2094250B0078C534 /* mainView.swift in Sources */,
+				D1EA4B0C20B5172500BD3F9D /* alarmView.swift in Sources */,
+				D1C41E1820B530FA00D97458 /* alarmSoundCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

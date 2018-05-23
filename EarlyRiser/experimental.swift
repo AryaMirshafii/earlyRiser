@@ -12,9 +12,10 @@ import UICircularProgressRing
 import CoreData
 import NotificationCenter
 import UserNotifications
+import MediaPlayer
 
 
-class experimental:UIViewController{
+class experimental: UIViewController{
     
     
     @IBOutlet weak var mainAlarmView: UIView!
@@ -29,11 +30,31 @@ class experimental:UIViewController{
     
     
     
+    
+    
+    
     private var alarms:[Alarm]!
     private var managedObjectContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if (MPMediaLibrary.authorizationStatus() != .authorized){
+            MPMediaLibrary.requestAuthorization { (status) in
+                if status == .authorized {
+                    
+                    print("Music Libaray is Authorized")
+                    
+                }
+                
+                
+                
+            }
+        }
+        
+        
+        
+        
         let notificationCenter = NotificationCenter.default
         
         notificationCenter.addObserver(self, selector: #selector(self.updateData), name: Notification.Name.NSManagedObjectContextObjectsDidChange, object: nil)
