@@ -58,6 +58,9 @@ public class Alarm: NSManagedObject, UNUserNotificationCenterDelegate {
     
     
     private func save(){
+        if(context == nil){
+            context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        }
         do {
             try context.save()
             
@@ -134,6 +137,9 @@ public class Alarm: NSManagedObject, UNUserNotificationCenterDelegate {
     
     public func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         completionHandler([.alert,.sound])
+        
+        
+        
     }
     
     
@@ -156,6 +162,9 @@ public class Alarm: NSManagedObject, UNUserNotificationCenterDelegate {
         }
         content.categoryIdentifier = "alarm.category"
         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: inSeconds, repeats: false)
+        
+        
+        
         addNotification(content: content, trigger: trigger , indentifier: "Alarm")
         
         
@@ -183,6 +192,7 @@ public class Alarm: NSManagedObject, UNUserNotificationCenterDelegate {
     
     
     public func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        
         let identifier = response.actionIdentifier
         let request = response.notification.request
         if identifier == "Snooze"{
@@ -196,22 +206,29 @@ public class Alarm: NSManagedObject, UNUserNotificationCenterDelegate {
         
         if identifier == "Dismiss"{
             player.pause()
-            timer.invalidate()
+            if(timer != nil){
+                timer.invalidate()
+            }
+            
         }
         
         completionHandler()
     }
     
     
-    private func alarmRinging(){
-        
-    }
+    
     
     
     
     
     
     @objc private func playsong(){
+        if(!isEnabled){
+            if(timer != nil){
+                timer.invalidate()
+            }
+            return
+        }
         //timer.invalidate()
        timer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(alarmSequence), userInfo: nil, repeats: true)
         
@@ -249,13 +266,32 @@ public class Alarm: NSManagedObject, UNUserNotificationCenterDelegate {
     }
     
     
+    func enableAlarm(){
+        self.isEnabled = true
+        self.setValue(true, forKey: "isEnabled")
+        initializeTimer()
+        self.save()
+    }
     
-    
+    func disableAlarm(){
+        self.isEnabled = false
+        self.setValue(false, forKey: "isEnabled")
+        NotificationCenter.default.removeObserver(self)
+        self.save()
+        if(timer != nil){
+            print("time is not nil")
+             self.timer.invalidate()
+        }
+       
+    }
     
     
     private var timerCounter = 0
     @objc func alarmSequence(){
-        if(timerCounter == 120){
+        if(!isEnabled){
+            return
+        }
+        if(timerCounter == 100_000){
             self.timer.invalidate()
            
         } else {

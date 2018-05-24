@@ -35,9 +35,10 @@ class alarmCell: UITableViewCell{
     
     func determineSwitch(){
         if(enableSwitch.isOn == true){
-            
+            theAlarm.enableAlarm()
         } else{
             
+            theAlarm.disableAlarm()
             enableSwitch.layer.cornerRadius = enableSwitch.frame.height / 2
             enableSwitch.backgroundColor = UIColor(red:0.00, green:0.40, blue:1.00, alpha:1.0)
         }

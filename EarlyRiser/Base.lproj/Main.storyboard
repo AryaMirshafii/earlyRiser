@@ -218,7 +218,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="alarmCell" rowHeight="90" id="w6J-7v-F4X" userLabel="alarmCell" customClass="alarmCell" customModule="EarlyRiser" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="alarmCell" rowHeight="90" id="w6J-7v-F4X" userLabel="alarmCell" customClass="alarmCell" customModule="EarlyRiser" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="127" width="375" height="90"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="w6J-7v-F4X" id="Cvz-P9-lgY">
@@ -600,18 +600,47 @@
                                     </segue>
                                 </connections>
                             </button>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BTK-8M-fyP">
+                                <rect key="frame" x="8" y="140" width="359" height="340"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Enable Or Add Some Alarms" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k7O-QJ-pbB">
+                                        <rect key="frame" x="0.0" y="52" width="359" height="188"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" name="HKGrotesk-SemiBoldLegacy" family="HK Grotesk" pointSize="55"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="boV-Km-fpQ"/>
                     </view>
                     <connections>
+                        <outlet property="alarm1AMPMLabel" destination="Etd-Tj-DjV" id="jnz-Hh-4d2"/>
+                        <outlet property="alarm1TimeLabel" destination="Hrf-BU-np4" id="h0h-dt-wSa"/>
                         <outlet property="alarm1View" destination="pQd-xA-6mR" id="gTg-lW-NZL"/>
+                        <outlet property="alarm2AMPMLabels" destination="eA4-Xd-deI" id="uV0-Eb-Dcn"/>
+                        <outlet property="alarm2TimeLabel" destination="jX5-wD-7mv" id="szY-Zg-y7D"/>
                         <outlet property="alarm2View" destination="hYV-ho-cO9" id="C27-b0-ZRo"/>
+                        <outlet property="alarm3AMPMLabel" destination="hHG-Dz-3aY" id="c90-hv-QX1"/>
+                        <outlet property="alarm3TimeLabel" destination="EU6-3y-AAv" id="gTf-lL-sgz"/>
                         <outlet property="alarm3View" destination="YNG-13-DAQ" id="2XE-fY-atn"/>
+                        <outlet property="alarm4AMPMLabel" destination="kcL-vU-Z9e" id="1U0-Db-QpB"/>
+                        <outlet property="alarm4TimeLabel" destination="I9K-tE-qgl" id="VLn-B4-klW"/>
                         <outlet property="alarm4View" destination="8gJ-5n-FfB" id="mnI-7q-7H2"/>
+                        <outlet property="alarm5AMPMLabels" destination="EQU-ox-inu" id="zja-qh-ABG"/>
+                        <outlet property="alarm5TimeLabel" destination="hmb-SI-Hca" id="XNE-fO-l6p"/>
                         <outlet property="alarm5View" destination="roi-p5-aQ5" id="rqa-iw-7fT"/>
+                        <outlet property="alarm6AMPMLabel" destination="DaR-Iq-h7w" id="Kt3-gy-2y1"/>
+                        <outlet property="alarm6TimeLabel" destination="7FZ-bZ-Wu9" id="qMX-zj-rZ6"/>
                         <outlet property="alarm6View" destination="Wif-At-FUE" id="cpV-6l-2NV"/>
+                        <outlet property="mainAlarmAMPMLabel" destination="8C0-YH-kiW" id="Ysd-rV-zjo"/>
+                        <outlet property="mainAlarmTimeLabel" destination="3mw-0Y-2et" id="R4O-lb-2Ia"/>
                         <outlet property="mainAlarmView" destination="Z7f-Vi-qug" id="GQh-o0-JPu"/>
+                        <outlet property="noAlarmsView" destination="BTK-8M-fyP" id="fcY-M5-m2e"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rit-Gh-jvy" userLabel="First Responder" sceneMemberID="firstResponder"/>
