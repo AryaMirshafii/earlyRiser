@@ -29,7 +29,7 @@ public class Alarm: NSManagedObject, UNUserNotificationCenterDelegate {
     
     var player = MPMusicPlayerController.applicationMusicPlayer
     var songs:[MPMediaItem]!
-    
+    let snooze:TimeInterval = 5.0
     
     convenience init(enabled: Bool, hour : Int64, numberOfMinutes : Int64, amORPM: String, insertIntoManagedObjectContext objectContext: NSManagedObjectContext!, tone:String) {
         let entity = NSEntityDescription.entity(forEntityName: "Alarm", in: objectContext)!
@@ -51,12 +51,7 @@ public class Alarm: NSManagedObject, UNUserNotificationCenterDelegate {
     
     
     
-    public func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-        
-        
-        
-        completionHandler([.alert, .sound])
-    }
+    
     
     
     
@@ -91,7 +86,7 @@ public class Alarm: NSManagedObject, UNUserNotificationCenterDelegate {
         totalTime = (abs(hour * 3600))
         
         
-        totalTime  = totalTime + Int64(minutes * 60) - currentTime
+        self.totalTime  = totalTime + Int64(minutes * 60) - currentTime
         
         self.setValue(totalTime, forKey: "totalTime")
         self.save()
@@ -119,6 +114,10 @@ public class Alarm: NSManagedObject, UNUserNotificationCenterDelegate {
        
         
         
+        
+        
+        setCategories()
+        
         timedNotifications(inSeconds: TimeInterval(totalTime)) { (success) in
             if success {
                 print("Successfully Set Alarm")
@@ -132,34 +131,75 @@ public class Alarm: NSManagedObject, UNUserNotificationCenterDelegate {
     
     
     
+    
+    public func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        completionHandler([.alert,.sound])
+    }
+    
+    
+    private func setCategories(){
+        let snoozeAction = UNNotificationAction(identifier: "Dismiss", title: "End Alarm", options: [])
+        let commentAction = UNNotificationAction(identifier: "Snooze", title: "Snooze", options: [])
+        let alarmCategory = UNNotificationCategory(identifier: "alarm.category",actions: [snoozeAction,commentAction],intentIdentifiers: [], options: [])
+        UNUserNotificationCenter.current().setNotificationCategories([alarmCategory])
+    }
+    
+    
+    
     func timedNotifications(inSeconds: TimeInterval, completion: @escaping (_ Success: Bool) -> ()) {
-        
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: inSeconds, repeats: false)
-        
-        
         let content = UNMutableNotificationContent()
-    
-        content.title = "Alarm is ringing!!!!"
-        
-        
+        content.title = "Alarm"
+        content.subtitle = "First Alarm"
+        content.body = "First Alarm"
         if(songs.isEmpty){
-             content.sound = UNNotificationSound.default()
+            content.sound = UNNotificationSound.default()
         }
-       
-       
+        content.categoryIdentifier = "alarm.category"
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: inSeconds, repeats: false)
+        addNotification(content: content, trigger: trigger , indentifier: "Alarm")
         
         
+       
+
     
-        let request = UNNotificationRequest(identifier: "customNotification", content: content, trigger: trigger)
         
-        
-        UNUserNotificationCenter.current().add(request) { (error) in
-            if error != nil {
-                completion(false)
-            }else {
-                completion(true)
+    }
+    
+    
+    
+    func addNotification(content:UNNotificationContent,trigger:UNNotificationTrigger?, indentifier:String){
+        let request = UNNotificationRequest(identifier: indentifier, content: content, trigger: trigger)
+        UNUserNotificationCenter.current().add(request, withCompletionHandler: {
+            (errorObject) in
+            if let error = errorObject{
+                print("Error \(error.localizedDescription) in notification \(indentifier)")
             }
+        })
+    }
+    
+    
+    
+    
+    
+    
+    public func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        let identifier = response.actionIdentifier
+        let request = response.notification.request
+        if identifier == "Snooze"{
+            let newContent = request.content.mutableCopy() as! UNMutableNotificationContent
+            newContent.body = "Snooze 5 Seconds"
+            newContent.subtitle = "Snooze 5 Seconds"
+            let newTrigger = UNTimeIntervalNotificationTrigger(timeInterval: snooze, repeats: false)
+            addNotification(content: newContent, trigger: newTrigger, indentifier: request.identifier)
+            
         }
+        
+        if identifier == "Dismiss"{
+            player.pause()
+            timer.invalidate()
+        }
+        
+        completionHandler()
     }
     
     
@@ -209,17 +249,7 @@ public class Alarm: NSManagedObject, UNUserNotificationCenterDelegate {
     }
     
     
-    public func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
-        if response.notification.request.content.categoryIdentifier == "customNotification" {
-            // Handle the actions for the expired timer.
-            if response.actionIdentifier == "SNOOZE_ACTION" {
-                // Invalidate the old timer and create a new one. . .
-            }
-            else if response.actionIdentifier == "STOP_ACTION" {
-                // Invalidate the timer. . .
-            }
-        }
-    }
+    
     
     
     
