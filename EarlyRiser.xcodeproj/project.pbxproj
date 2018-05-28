@@ -31,6 +31,8 @@
 		D1008E7E20A94D6300EE47E7 /* HKGrotesk-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D1C84CC0209418EC0078C534 /* HKGrotesk-Regular.ttf */; };
 		D1008E7F20A94D6300EE47E7 /* HKGrotesk-RegularLegacy.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D1C84CB8209418EB0078C534 /* HKGrotesk-RegularLegacy.ttf */; };
 		D1158FED2095676A000F63EC /* Alarm.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1158FEC2095676A000F63EC /* Alarm.swift */; };
+		D19271B720BBB9CF008F93C7 /* normalAlarmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D19271B620BBB9CF008F93C7 /* normalAlarmView.swift */; };
+		D19271B920BBBC8A008F93C7 /* alarmRinger.swift in Sources */ = {isa = PBXBuildFile; fileRef = D19271B820BBBC8A008F93C7 /* alarmRinger.swift */; };
 		D1A6447F2096690B00BF5ED9 /* takingCareOfAlarm.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D1A6447E2096690A00BF5ED9 /* takingCareOfAlarm.mp3 */; };
 		D1C41E1820B530FA00D97458 /* alarmSoundCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1C41E1720B530FA00D97458 /* alarmSoundCell.swift */; };
 		D1C542C220A68DF700927932 /* experimental.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1C542C120A68DF700927932 /* experimental.swift */; };
@@ -76,6 +78,8 @@
 		D10714BE20A8FF2D006BB94F /* EarlyRiser.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = EarlyRiser.entitlements; sourceTree = "<group>"; };
 		D1158FEC2095676A000F63EC /* Alarm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alarm.swift; sourceTree = "<group>"; };
 		D13AE9F020AE5D7B003D8544 /* EarlyRiser-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "EarlyRiser-Bridging-Header.h"; sourceTree = "<group>"; };
+		D19271B620BBB9CF008F93C7 /* normalAlarmView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = normalAlarmView.swift; sourceTree = "<group>"; };
+		D19271B820BBBC8A008F93C7 /* alarmRinger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = alarmRinger.swift; sourceTree = "<group>"; };
 		D1A6447E2096690A00BF5ED9 /* takingCareOfAlarm.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = takingCareOfAlarm.mp3; sourceTree = "<group>"; };
 		D1C41E1720B530FA00D97458 /* alarmSoundCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = alarmSoundCell.swift; sourceTree = "<group>"; };
 		D1C542C120A68DF700927932 /* experimental.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = experimental.swift; sourceTree = "<group>"; };
@@ -189,9 +193,11 @@
 			children = (
 				D10714BE20A8FF2D006BB94F /* EarlyRiser.entitlements */,
 				D1158FEC2095676A000F63EC /* Alarm.swift */,
+				D19271B820BBBC8A008F93C7 /* alarmRinger.swift */,
 				D1C84CD02094265C0078C534 /* alarmCell.swift */,
 				D1C84C872094188F0078C534 /* AppDelegate.swift */,
 				D1C84C892094188F0078C534 /* ViewController.swift */,
+				D19271B620BBB9CF008F93C7 /* normalAlarmView.swift */,
 				D1C84C8B2094188F0078C534 /* Main.storyboard */,
 				D1C542C120A68DF700927932 /* experimental.swift */,
 				D1C84CD2209429F10078C534 /* alarmEditView.swift */,
@@ -491,12 +497,14 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-EarlyRiser/Pods-EarlyRiser-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/ASHorizontalScrollView/ASHorizontalScrollView.framework",
 				"${BUILT_PRODUCTS_DIR}/GWInfinitePickerView/GWInfinitePickerView.framework",
 				"${BUILT_PRODUCTS_DIR}/HEDatePicker/HEDatePicker.framework",
 				"${BUILT_PRODUCTS_DIR}/UICircularProgressRing/UICircularProgressRing.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ASHorizontalScrollView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GWInfinitePickerView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/HEDatePicker.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/UICircularProgressRing.framework",
@@ -591,9 +599,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D19271B720BBB9CF008F93C7 /* normalAlarmView.swift in Sources */,
 				D1C84C902094188F0078C534 /* EarlyRiser.xcdatamodeld in Sources */,
 				D1C84C8A2094188F0078C534 /* ViewController.swift in Sources */,
 				D1C84CD3209429F10078C534 /* alarmEditView.swift in Sources */,
+				D19271B920BBBC8A008F93C7 /* alarmRinger.swift in Sources */,
 				D1C542C220A68DF700927932 /* experimental.swift in Sources */,
 				D1C84C882094188F0078C534 /* AppDelegate.swift in Sources */,
 				D1C84CD12094265C0078C534 /* alarmCell.swift in Sources */,

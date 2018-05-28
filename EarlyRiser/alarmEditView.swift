@@ -9,7 +9,7 @@
 import Foundation
 import  UIKit
 import MediaPlayer
-
+import ASHorizontalScrollView
 
 import HEDatePicker
 extension String {
@@ -25,6 +25,7 @@ class alarmEditView: UIViewController, UIPickerViewDelegate,UIPickerViewDataSour
     
     
     
+    @IBOutlet weak var whiteView: UIView!
     
     
    
@@ -35,6 +36,7 @@ class alarmEditView: UIViewController, UIPickerViewDelegate,UIPickerViewDataSour
     
     @IBOutlet weak var currentAlarmSound: UILabel!
     
+    @IBOutlet weak var alarmTypeSelector: ASHorizontalScrollView!
     
     
     
@@ -51,7 +53,7 @@ class alarmEditView: UIViewController, UIPickerViewDelegate,UIPickerViewDataSour
     private var currentToneName = "Default"
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        whiteView.layer.cornerRadius = 15
         
         //timePicker.setValue(UIColor.white, forKeyPath: "textColor")
         
@@ -86,9 +88,38 @@ class alarmEditView: UIViewController, UIPickerViewDelegate,UIPickerViewDataSour
         alarmSoundTableView.delegate = self
         alarmSoundTableView.dataSource = self
         
+        let button1 = UIButton(frame: CGRect(x: 0, y: 0, width: 135, height: 40))
+        let button2 = UIButton(frame: CGRect(x: 0, y: 0, width: 135, height: 40))
+        //let button3 = UIButton(frame: CGRect(x: 0, y: 0, width: 80, height: 40))
+       // let button4 = UIButton(frame: CGRect(x: 0, y: 0, width: 80, height: 40))
+        
+        button1.backgroundColor = UIColor(red:0.72, green:0.72, blue:0.72, alpha:1.0)
+        button2.backgroundColor = UIColor(red:0.72, green:0.72, blue:0.72, alpha:1.0)
+        //button3.backgroundColor = UIColor(red:0.72, green:0.72, blue:0.72, alpha:1.0)
+        //button4.backgroundColor = UIColor(red:0.72, green:0.72, blue:0.72, alpha:1.0)
+        
+        button1.setTitle("Normal", for: .normal)
+        button2.setTitle("Motion", for: .normal)
+        
+        
+        button1.layer.cornerRadius = 8
+        button2.layer.cornerRadius = 8
+        
+        
+        button1.titleLabel?.font =  UIFont(name: "HKGrotesk-SemiBoldLegacy", size: 20)
+        button2.titleLabel?.font =  UIFont(name: "HKGrotesk-SemiBoldLegacy", size: 20)
         
         
         
+        //button1.addTarget(self, action: #selector(button1Tapped), for: .touchUpInside)
+        //button2.addTarget(self, action: #selector(button2Tapped), for: .touchUpInside)
+        
+        alarmTypeSelector.uniformItemSize = CGSize(width: 160, height: 40)
+        alarmTypeSelector.addItems([button1,button2])
+        alarmTypeSelector.layer.cornerRadius = 10
+        
+       
+        alarmTypeSelector.clipsToBounds = true
         if (MPMediaLibrary.authorizationStatus() != .authorized){
             MPMediaLibrary.requestAuthorization { (status) in
                 if status == .authorized {
@@ -149,7 +180,7 @@ class alarmEditView: UIViewController, UIPickerViewDelegate,UIPickerViewDataSour
     
     
     override func viewDidAppear(_ animated: Bool) {
-        timePicker.backgroundColor = UIColor.clear
+        //timePicker.backgroundColor = UIColor.clear
         let date = Date()
         let calendar = Calendar.current
         let ActualHour = calendar.component(.hour, from: date) + 23
@@ -166,6 +197,9 @@ class alarmEditView: UIViewController, UIPickerViewDelegate,UIPickerViewDataSour
         
        
         minutes = Int64(actualMinutes)
+        if(minutes >= 120){
+            minutes = minutes - 120
+        }
         timePicker.selectRow(ActualHour, inComponent: 0, animated: false)
         timePicker.selectRow(actualMinutes, inComponent: 1, animated: false)
         
@@ -257,7 +291,7 @@ class alarmEditView: UIViewController, UIPickerViewDelegate,UIPickerViewDataSour
         if label == nil {
             label = UILabel()
         }
-        label?.textColor = UIColor.white
+        label?.textColor = UIColor.black
         label?.font = UIFont(name: "HKGrotesk-SemiBoldLegacy", size:30)
         label?.textAlignment = .center
         if component == 0 {

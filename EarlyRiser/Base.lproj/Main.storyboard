@@ -95,6 +95,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gNR-YJ-dLb">
+                                <rect key="frame" x="16" y="20" width="343" height="544"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mk0-Yd-Yh5" userLabel="Exit">
                                 <rect key="frame" x="37" y="572" width="118" height="49"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -107,8 +112,9 @@
                                 </connections>
                             </button>
                             <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZAR-US-Bfx">
-                                <rect key="frame" x="37" y="20" width="301" height="209"/>
+                                <rect key="frame" x="16" y="20" width="343" height="209"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </pickerView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qhE-Vp-8lF">
                                 <rect key="frame" x="241" y="572" width="118" height="49"/>
@@ -121,12 +127,23 @@
                                     <action selector="saveAlarm:" destination="O8D-YB-ya0" eventType="touchUpInside" id="VXp-Dn-oAA"/>
                                 </connections>
                             </button>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Pud-fa-TXB" customClass="ASHorizontalScrollView" customModule="ASHorizontalScrollView">
+                                <rect key="frame" x="16" y="289" width="343" height="59"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G6t-dT-9AW">
+                                <rect key="frame" x="26" y="240" width="322" height="24"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="HKGrotesk-SemiBoldLegacy" family="HK Grotesk" pointSize="25"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="60" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="J4e-9P-cgW">
-                                <rect key="frame" x="16" y="253" width="343" height="297"/>
+                                <rect key="frame" x="16" y="345" width="343" height="201"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="alarmSoundCell" rowHeight="60" id="vzj-ov-zO8" customClass="alarmSoundCell" customModule="EarlyRiser" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="alarmSoundCell" rowHeight="60" id="vzj-ov-zO8" customClass="alarmSoundCell" customModule="EarlyRiser" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="343" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="vzj-ov-zO8" id="FJV-cI-XMK">
@@ -153,21 +170,16 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G6t-dT-9AW">
-                                <rect key="frame" x="26" y="214" width="322" height="24"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="HKGrotesk-SemiBoldLegacy" family="HK Grotesk" pointSize="25"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="xRB-96-VNy"/>
                     </view>
                     <connections>
                         <outlet property="alarmSoundTableView" destination="J4e-9P-cgW" id="XRp-Ws-nO1"/>
+                        <outlet property="alarmTypeSelector" destination="Pud-fa-TXB" id="a37-hE-cX5"/>
                         <outlet property="currentAlarmSound" destination="G6t-dT-9AW" id="hmE-mP-aCb"/>
                         <outlet property="timePicker" destination="ZAR-US-Bfx" id="bOL-T6-Xcr"/>
+                        <outlet property="whiteView" destination="gNR-YJ-dLb" id="YoE-PD-PbU"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yYn-QN-4G9" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -271,6 +283,49 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7e1-5S-wQG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="325.60000000000002" y="1745.577211394303"/>
+        </scene>
+        <!--Normal Alarm View-->
+        <scene sceneID="k7Q-sp-xOQ">
+            <objects>
+                <viewController id="CWt-61-baK" customClass="normalAlarmView" customModule="EarlyRiser" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="205-81-w8L">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="clock" translatesAutoresizingMaskIntoConstraints="NO" id="e5u-iD-j0u">
+                                <rect key="frame" x="59" y="48" width="256" height="256"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aTK-Dt-xdN">
+                                <rect key="frame" x="16" y="465" width="148" height="65"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="HKGrotesk-SemiBoldLegacy" family="HK Grotesk" pointSize="45"/>
+                                <state key="normal" title="Snooze">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="snoozeButton:" destination="CWt-61-baK" eventType="touchUpInside" id="lDJ-al-MMw"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r5A-3Y-HlI">
+                                <rect key="frame" x="211" y="465" width="148" height="65"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="HKGrotesk-SemiBoldLegacy" family="HK Grotesk" pointSize="45"/>
+                                <state key="normal" title="Disable">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="disableButton:" destination="CWt-61-baK" eventType="touchUpInside" id="gvL-O7-SIi"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="2hx-e1-ynG"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="aho-lO-20K" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1738.4000000000001" y="2039.7301349325339"/>
         </scene>
         <!--Experimental-->
         <scene sceneID="dhX-mv-EO6">
@@ -641,6 +696,7 @@
                         <outlet property="mainAlarmTimeLabel" destination="3mw-0Y-2et" id="R4O-lb-2Ia"/>
                         <outlet property="mainAlarmView" destination="Z7f-Vi-qug" id="GQh-o0-JPu"/>
                         <outlet property="noAlarmsView" destination="BTK-8M-fyP" id="fcY-M5-m2e"/>
+                        <segue destination="CWt-61-baK" kind="presentation" identifier="normalAlarm" id="zkQ-ld-0lI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rit-Gh-jvy" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -651,6 +707,7 @@
     <resources>
         <image name="addItem" width="64" height="64"/>
         <image name="backgroundImage" width="1920" height="1080"/>
+        <image name="clock" width="256" height="256"/>
         <image name="left" width="128" height="128"/>
         <image name="menu" width="64" height="64"/>
         <image name="right-arrow" width="256" height="256"/>

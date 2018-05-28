@@ -27,9 +27,10 @@ public class Alarm: NSManagedObject, UNUserNotificationCenterDelegate {
     @NSManaged var toneName:String
     
     
-    var player = MPMusicPlayerController.applicationMusicPlayer
-    var songs:[MPMediaItem]!
-    let snooze:TimeInterval = 5.0
+    private var player = MPMusicPlayerController.applicationMusicPlayer
+    private var songs:[MPMediaItem]!
+    private var snooze:TimeInterval = 5.0
+    private var alarmRingManager = alarmRinger()
     
     convenience init(enabled: Bool, hour : Int64, numberOfMinutes : Int64, amORPM: String, insertIntoManagedObjectContext objectContext: NSManagedObjectContext!, tone:String) {
         let entity = NSEntityDescription.entity(forEntityName: "Alarm", in: objectContext)!
@@ -85,12 +86,17 @@ public class Alarm: NSManagedObject, UNUserNotificationCenterDelegate {
         
         
         print("hour is: + " + String(hour))
-        
+        print("minute is: + " + String(minutes))
         totalTime = (abs(hour * 3600))
         
         
         self.totalTime  = totalTime + Int64(minutes * 60) - currentTime
         
+        
+        if(totalTime <= 0){
+            print("The total time is less than 0")
+            self.totalTime = 86400 - totalTime
+        }
         self.setValue(totalTime, forKey: "totalTime")
         self.save()
         //print("The timer time is" + String(time))
@@ -130,6 +136,13 @@ public class Alarm: NSManagedObject, UNUserNotificationCenterDelegate {
         
         
         
+    }
+    
+    public func snoozeAlarm(){
+        self.totalTime = totalTime + (2 * 60)
+        self.minutes = minutes + 2
+        
+        save()
     }
     
     
@@ -234,10 +247,11 @@ public class Alarm: NSManagedObject, UNUserNotificationCenterDelegate {
         
        
         do {
-         
+            
             print("Song PLayed")
             self.setValue(false, forKey: "isEnabled")
             self.save()
+            alarmRingManager.setRingState(state: true)
             
             
 
@@ -278,6 +292,8 @@ public class Alarm: NSManagedObject, UNUserNotificationCenterDelegate {
         self.setValue(false, forKey: "isEnabled")
         NotificationCenter.default.removeObserver(self)
         self.save()
+        player.pause()
+        
         if(timer != nil){
             print("time is not nil")
              self.timer.invalidate()
